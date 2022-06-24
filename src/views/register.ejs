@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head') %>
+  <body>
+    <%- include('./partials/navbar') %>
+    <section class="py-8">
+      <div class="max-w-screen-xl mx-auto px-4">
+        <form
+          action="/user/register"
+          method="POST"
+          enctype="multipart/form-data"
+          class="p-8 max-w-screen-sm mx-auto flex flex-col gap-4 shadow-md"
+        >
+          <div class="flex flex-col">
+            <label for="firstName">First name</label>
+            <input
+              class="p-2 border rounded-md <%= locals.errors && errors.firstName ? 'border-red-700' : null %>"
+              type="text"
+              name="firstName"
+              id="firstName"
+              value="<%= locals.oldData ? oldData.firstName : null %>"
+            />
+            <% if (locals.errors && errors.firstName) { %>
+            <span class="text-xs text-red-700"
+              ><%= errors.firstName.msg %> <i class="fa-solid fa-circle-exclamation"></i
+            ></span>
+            <% } %>
+          </div>
+          <div class="flex flex-col">
+            <label for="lastName">Last name</label>
+            <input
+              class="p-2 border rounded-md <%= locals.errors && errors.lastName ? 'border-red-700' : null %>"
+              type="text"
+              name="lastName"
+              id="lastName"
+              value="<%= locals.oldData ? oldData.lastName : null %>"
+            />
+            <% if (locals.errors && errors.lastName) { %>
+            <span class="text-xs text-red-700"
+              ><%= errors.lastName.msg %> <i class="fa-solid fa-circle-exclamation"></i
+            ></span>
+            <% } %>
+          </div>
+          <div class="flex flex-col">
+            <label for="email">Email</label>
+            <input
+              class="p-2 border rounded-md <%= locals.errors && errors.email ? 'border-red-700' : null %>"
+              type="text"
+              name="email"
+              id="email"
+              value="<%= locals.oldData ? oldData.email : null %>"
+            />
+            <% if (locals.errors && errors.email) { %>
+            <span class="text-xs text-red-700"
+              ><%= errors.email.msg %> <i class="fa-solid fa-circle-exclamation"></i
+            ></span>
+            <% } %>
+          </div>
+          <div class="flex flex-col">
+            <label for="password">Password</label>
+            <input
+              class="p-2 border rounded-md <%= locals.errors && errors.password ? 'border-red-700' : null %>"
+              type="password"
+              name="password"
+              id="password"
+              value="<%= locals.oldData ? oldData.password : null %>"
+            />
+            <% if (locals.errors && errors.password) { %>
+            <span class="text-xs text-red-700"
+              ><%= errors.password.msg %> <i class="fa-solid fa-circle-exclamation"></i
+            ></span>
+            <% } %>
+          </div>
+          <div class="flex flex-col">
+            <label for="country">Country</label>
+            <select
+              class="p-2 border rounded-md <%= locals.errors && errors.country ? 'border-red-700' : null %>"
+              name="country"
+              id="country"
+            >
+              <option value="">Select one</option>
+              <% for (country of countries) { %>
+              <option value="<%= country %>"
+                <%= locals.oldData && (country === oldData.country) ? 'selected' : null %> 
+                ><%= country %></option>
+              <% } %>
+            </select>
+            <% if (locals.errors && errors.country) { %>
+            <span class="text-xs text-red-700"
+              ><%= errors.country.msg %> <i class="fa-solid fa-circle-exclamation"></i
+            ></span>
+            <% } %>
+          </div>
+          <div class="flex flex-col">
+            <label class="mb-2" for="avatar">Profile picture</label>
+            <input type="file" name="avatar" id="avatar" />
+          </div>
+          <button
+            class="mt-2 p-4 bg-gray-700 text-gray-100 rounded-md text-xs uppercase tracking-widest font-bold"
+            type="submit"
+          >
+            Register
+          </button>
+        </form>
+      </div>
+    </section>
+  </body>
+</html>
