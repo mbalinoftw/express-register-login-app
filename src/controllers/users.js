@@ -212,7 +212,7 @@ const { validationResult } = require('express-validator')
 
 const controller = {
   register: (req, res) => {
-    res.render("register", {
+    return res.render("users/register", {
       countries,
     });
   },
@@ -220,15 +220,19 @@ const controller = {
     const inputFieldsValidation = validationResult(req);
 
     if (inputFieldsValidation.errors.length > 0) {
-      return res.render("register", {
+      return res.render("users/register", {
         errors: inputFieldsValidation.mapped(),
         countries,
         oldData: req.body
       })
     }
+
+    return res.render("users/registerSuccess", {
+      user: req.body
+    })
   },
   login: (req, res) => {
-    return res.render("login");
+    return res.render("users/login");
   },
 };
 

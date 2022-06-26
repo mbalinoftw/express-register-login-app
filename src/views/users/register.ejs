@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include('./partials/head') %>
+  <%- include('../partials/head') %>
   <body>
-    <%- include('./partials/navbar') %>
+    <%- include('../partials/navbar') %>
     <section class="py-8">
       <div class="max-w-screen-xl mx-auto px-4">
         <form
@@ -93,7 +93,12 @@
           </div>
           <div class="flex flex-col">
             <label class="mb-2" for="avatar">Profile picture</label>
-            <input type="file" name="avatar" id="avatar" />
+            <input class="<%= locals.errors && errors.avatar ? 'rounded-md border border-red-700' : null %>" type="file" name="avatar" id="avatar" />
+            <% if (locals.errors && errors.avatar) { %>
+              <span class="text-xs text-red-700"
+              ><%= errors.avatar.msg %> <i class="fa-solid fa-circle-exclamation"></i
+            ></span>
+            <% } %> 
           </div>
           <button
             class="mt-2 p-4 bg-gray-700 text-gray-100 rounded-md text-xs uppercase tracking-widest font-bold"

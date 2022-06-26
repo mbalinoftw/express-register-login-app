@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head') %>
+  <body>
+    <%- include('../partials/navbar') %>
+    <section class="py-24">
+      <div class="max-w-screen-sm mx-auto px-4 flex flex-col items-center">
+        <i class="mb-4 fa-solid fa-circle-check text-7xl text-green-500"></i>
+        <h2 class="mb-4 text-2xl font-bold text-green-500 text-center uppercase tracking-wider">
+          Success!
+        </h2>
+        <p class="mb-6 text-xl font-bold text-center tracking-wider">
+          <%= user.firstName %>, your registration is complete.
+        </p>
+        <a href="/user/login" class="px-12 py-2 rounded-md bg-green-500 text-white uppercase">Continue</a>
+      </div>
+    </section>
+  </body>
+</html>

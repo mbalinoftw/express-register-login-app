@@ -1,6 +1,3 @@
-// 48:50 - Validación completa con Express Validator
-
-
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
