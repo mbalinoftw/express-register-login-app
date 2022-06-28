@@ -34,18 +34,17 @@ const validations = [
     // accesible from Multer (function "uploadFile")
     let acceptedFileType = [".jpg", ".jpeg", ".png", ".gif"];
     let file = req.file;
-    if (!file) {
-      throw new Error("Please upload a profile image");
+    if (typeof file === "undefined") {
+      file = null
     } else {
       let fileExtension = path.extname(file.originalname);
       if (!acceptedFileType.includes(fileExtension)) {
-        throw new Error(`Please enter a valid image format: ${acceptedFileType.join(", ")}`);
+        throw new Error(`Please upload a valid image format: ${acceptedFileType.join(", ")}`);
       }
     }
     return true;
   }),
 ];
-
 
 
 router.get("/register", register);

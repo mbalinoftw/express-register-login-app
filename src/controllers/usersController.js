@@ -227,8 +227,14 @@ const controller = {
       })
     }
 
+    // store all input field values in user
+    const user = req.body;
+    // store image uploaded by user if it exists, otherwise get default avatar
+    user.avatar = req.file?.filename || "user-default.webp";
+
+    console.log(user)
     return res.render("users/registerSuccess", {
-      user: req.body
+      user
     })
   },
   login: (req, res) => {
