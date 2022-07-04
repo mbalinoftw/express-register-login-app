@@ -1,3 +1,6 @@
+// PROCESO DE LOGIN COMPLETO 54:00 (processLogin)
+
+require("dotenv").config();
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
@@ -22,7 +25,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(session({secret: "secret_cookie", resave: true, saveUninitialized: true}));
 
 app.use("/", mainRoutes);
-app.use("/user", userRoutes);
+app.use("/users", userRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

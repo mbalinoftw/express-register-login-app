@@ -207,15 +207,14 @@ const countries = [
   "Zambia",
   "Zimbabwe",
 ];
-const bcryptjs = require("bcryptjs");
-const User = require("../database/models/User.js");
+const UserModel = require("../database/models/UserModel.js");
 
 const {validationResult} = require("express-validator");
 
 const controller = {
   getAllUsers: async (req, res) => {
     try {
-      const users = await User.findAll();
+      const users = await UserModel.findAll();
       res.json(users);
     } catch (error) {
       res.json({message: error.message});
@@ -224,7 +223,7 @@ const controller = {
   getUser: async (req, res) => {
     try {
       const {id} = req.params;
-      const user = await User.findByPk(id);
+      const user = await UserModel.findByPk(id);
       res.json();
     } catch (error) {
       res.json({message: error.message});
@@ -235,7 +234,7 @@ const controller = {
       countries,
     });
   },
-  processRegister: async (req, res) => {
+  processRegister: (req, res) => {
     const inputFieldsValidation = validationResult(req);
 
     if (inputFieldsValidation.errors.length > 0) {
@@ -245,31 +244,10 @@ const controller = {
         oldData: req.body,
       });
     }
-
-    let userAlreadyExists = await User.findByField('email', req.body.email);
-
-    if (userAlreadyExists) {
-      return res.render("users/register", {
-        errors: {
-          email: {
-            msg: "This email is already registered."
-          }
-        },
-        countries,
-        oldData: req.body,
-      });
-    }
-
-    let userData = {
-      ...req.body,
-      password: bcryptjs.hashSync(req.body.password, 10),
-      // store in avatar the image uploaded by the user or store default
-      avatar: req.file?.filename || "!user-default.webp"
-    }
-
     // store all input field values in user
-    let user = await User.create(userData);
-
+    const user = req.body;
+    // store image uploaded by user if it exists, otherwise get default avatar
+    user.avatar = req.file?.filename || "user-default.webp";
     return res.render("users/registerSuccess", {
       user,
     });
@@ -277,10 +255,6 @@ const controller = {
   login: (req, res) => {
     return res.render("users/login");
   },
-
-  processLogin: async (req, res) => {
-    
-  }
 };
 
 module.exports = controller;
