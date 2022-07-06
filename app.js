@@ -1,5 +1,3 @@
-// PROCESO DE LOGIN COMPLETO 54:00 (processLogin)
-
 require("dotenv").config();
 const createError = require("http-errors");
 const express = require("express");

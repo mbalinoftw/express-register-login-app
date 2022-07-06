@@ -5,19 +5,35 @@
     <%- include('../partials/navbar') %>
     <section class="py-8">
       <div class="max-w-screen-xl mx-auto px-4">
-        <form
-          action="/users/login"
-          method="POST"
-          enctype="multipart/form-data"
-          class="p-8 max-w-screen-sm mx-auto flex flex-col gap-4 shadow-md"
-        >
+        <form action="/users/login" method="POST" class="p-8 max-w-screen-sm mx-auto flex flex-col gap-4 shadow-md">
           <div class="flex flex-col">
             <label for="email">Email</label>
-            <input class="p-2 border rounded-md" type="email" name="email" id="email" />
+            <input
+              class="p-2 border rounded-md <%= locals.errors && errors.email ? 'border-red-700' : null %>"
+              type="email"
+              name="email"
+              id="email"
+              value="<%= locals.oldData ? oldData.email : null %>"
+            />
+            <% if (locals.errors && errors.email) { %>
+            <span class="text-xs text-red-700"
+              ><%= errors.email.msg %> <i class="fa-solid fa-circle-exclamation"></i
+            ></span>
+            <% } %>
           </div>
           <div class="flex flex-col">
             <label for="password">Password</label>
-            <input class="p-2 border rounded-md" type="password" name="password" id="password" />
+            <input
+              class="p-2 border rounded-md <%= locals.errors && errors.password ? 'border-red-700' : null %>"
+              type="password"
+              name="password"
+              id="password"
+            />
+            <% if (locals.errors && errors.password) { %>
+            <span class="text-xs text-red-700"
+              ><%= errors.password.msg %> <i class="fa-solid fa-circle-exclamation"></i
+            ></span>
+            <% } %>
           </div>
           <div class="">
             <input type="checkbox" id="remember" name="remember" value="remember" />

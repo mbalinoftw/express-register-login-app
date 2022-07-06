@@ -246,14 +246,14 @@ const controller = {
       });
     }
 
-    let userAlreadyExists = await User.findByField('email', req.body.email);
+    let userAlreadyExists = await User.findByField("email", req.body.email);
 
     if (userAlreadyExists) {
       return res.render("users/register", {
         errors: {
           email: {
-            msg: "This email is already registered."
-          }
+            msg: "This email is already registered.",
+          },
         },
         countries,
         oldData: req.body,
@@ -264,8 +264,8 @@ const controller = {
       ...req.body,
       password: bcryptjs.hashSync(req.body.password, 10),
       // store in avatar the image uploaded by the user or store default
-      avatar: req.file?.filename || "!user-default.webp"
-    }
+      avatar: req.file?.filename || "!user-default.webp",
+    };
 
     // store all input field values in user
     let user = await User.create(userData);
@@ -279,7 +279,37 @@ const controller = {
   },
 
   processLogin: async (req, res) => {
-    
+    let userToLogin = User.findByField("email", req.body.email);
+
+    if (userToLogin) {
+      let passwordIsCorrect = bcryptjs.compareSync(req.body.password, userToLogin.password);
+
+      if (passwordIsCorrect) {
+        res.redirect('/users/profile');
+      }
+
+      return res.render("users/login", {
+        errors: {
+          password: {
+            msg: "Password is incorrect. Please try again",
+          },
+        },
+        oldData: req.body,
+      });
+    }
+
+    return res.render("users/login", {
+      errors: {
+        email: {
+          msg: "Email not registered",
+        },
+      },
+      oldData: req.body,
+    });
+  },
+
+  profile: (req, res) => {
+    res.render('users/profile');
   }
 };
 
