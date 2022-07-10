@@ -1,27 +1,38 @@
 <nav class="py-4 bg-gray-900 text-gray-100">
-  <div class="max-w-screen-xl mx-auto px-4 flex items-baseline justify-between">
-    <div class="flex items-baseline gap-4">
-      <a href="/" class="text-2xl">
-        MERN Store
-      </a>
+  <div class="max-w-screen-xl mx-auto px-4 flex items-center justify-between">
+    <div class="flex items-center gap-4">
+      <a href="/" class=""><i class="fa-brands fa-shopify text-4xl"></i></a>
       <ul class="hidden md:flex items-center gap-4">
         <li><a href="/" class="">Home</a></li>
         <li><a href="/" class="">About</a></li>
         <li><a href="/" class="">Products</a></li>
       </ul>
     </div>
-    <div class="">
-      <% if (locals.userIsLogged) { %>
-        <ul class="flex items-center gap-4">
-          <li><a href="/users/profile" class="">Profile</a></li>
-          <li><a href="/users/logout" class="">Logout</a></li>
-        </ul>
-      <% } else { %>
-      <ul class="flex items-center gap-4">
-        <li><a href="/users/register" class="">Register</a></li>
-        <li><a href="/users/login" class="">Login</a></li>
+
+    <% if (locals.userIsLogged) { %>
+    <div class="relative">
+      <div class="flex items-center gap-4" id="profile">
+        <img
+          class="w-12 h-12 object-cover rounded-full"
+          src="img/avatars/<%= locals.userLogged.avatar %>"
+          alt="profile avatar"
+        />
+        <span class="text-xl">Hi, <%= locals.userLogged.firstName %></span>
+        <i class="fa-solid fa-caret-down"></i>
+      </div>
+      <ul
+        class="p-4 w-48 absolute transform origin-top-right scale-0 bg-gray-600 rounded-md shadow-md transition-transform duration-200"
+        id="profile-menu"
+      >
+        <li class="p-2 hover:bg-gray-400 rounded-lg"><a href="/users/profile" class="block">Profile</a></li>
+        <li class="p-2 hover:bg-gray-400 rounded-lg"><a href="/users/logout" class="block">Logout</a></li>
       </ul>
-      <% } %> 
     </div>
+    <% } else { %>
+    <ul class="flex gap-4">
+      <li><a href="/users/register" class="">Register</a></li>
+      <li><a href="/users/login" class="">Login</a></li>
+    </ul>
+    <% } %>
   </div>
 </nav>

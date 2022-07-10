@@ -3,27 +3,18 @@
     "id": 1,
     "firstName": "Mariano",
     "lastName": "Baliño",
-    "email": "marian@test.com",
-    "password": "$2a$10$hvUPyxOUjEHVYZQJnP/TCu7ykgWFFMVbsNO2nxZ.6clNbqDbsULNG",
+    "email": "marian@gmail.com",
+    "password": "$2a$10$IiOHIUoNDKQKK6prIs0fKer549/gpxHIdXlg4vT8WkH.6IqFzHm6e",
     "country": "Argentina",
-    "avatar": "MarianoBaliño_1657111262102.jpg"
+    "avatar": "MarianoBaliño_1657443561877.jpg"
   },
   {
     "id": 2,
-    "firstName": "Caxtor",
-    "lastName": "Baliño",
-    "email": "cax@gmail.com",
-    "password": "$2a$10$OJLx/75PUzhj39zRorFbOuGA8W5kn6UqiH8OHiQRGYBlxRmY3J9Uy",
-    "country": "Argentina",
-    "avatar": "CaxtorBaliño_1657144602900.jpg"
-  },
-  {
-    "id": 3,
-    "firstName": "adosadh",
-    "lastName": "jvnsfdvbfdv",
-    "email": "asd@a.com",
-    "password": "$2a$10$MczK521NBrKDWSqFqSOhKeQjNXui4j2yotilE6WkYEWUZU1b6kU.2",
-    "country": "Argentina",
-    "avatar": "adosadhjvnsfdvbfdv_1657241491934.jpg"
+    "firstName": "Test",
+    "lastName": "Master",
+    "email": "a@a.com",
+    "password": "$2a$10$MD/cqHRu3NzW/laFbCL0Pu2FEZfE3vI59WFDYRB9/EQs8H7k9gUNy",
+    "country": "United States of America",
+    "avatar": "TestMaster_1657443656435.jpg"
   }
 ]

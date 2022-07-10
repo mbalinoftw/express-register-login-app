@@ -3,14 +3,14 @@
   <%- include('../partials/head') %>
   <body>
     <%- include('../partials/navbar') %>
-    <section class="py-8">
+    <section class="py-8 bg-gray-50">
       <div class="max-w-screen-xl mx-auto px-4">
-        <form action="/users/login" method="POST" class="p-8 max-w-screen-sm mx-auto flex flex-col gap-4 shadow-md">
+        <form action="/users/login" method="POST" class="p-8 max-w-screen-sm mx-auto flex flex-col gap-4 bg-white shadow-md">
           <div class="flex flex-col">
             <label for="email">Email</label>
             <input
               class="p-2 border rounded-md <%= locals.errors && errors.email ? 'border-red-700' : null %>"
-              type="email"
+              type="text"
               name="email"
               id="email"
               value="<%= locals.oldData ? oldData.email : null %>"
@@ -36,8 +36,8 @@
             <% } %>
           </div>
           <div class="">
-            <input type="checkbox" id="remember-email" name="remember-email" value="remember-email" />
-            <label for="remember-email"> Remember me</label>
+            <input type="checkbox" id="remember_user" name="remember_user" />
+            <label for="remember_user"> Remember me</label>
           </div>
           <button
             class="mt-2 p-4 bg-gray-700 text-gray-100 rounded-md text-xs uppercase tracking-widest font-bold"

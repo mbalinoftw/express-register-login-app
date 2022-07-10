@@ -286,7 +286,14 @@ const controller = {
 
       if (passwordIsCorrect) {
         delete userToLogin.password;
-        req.session.userIsLogged = userToLogin;
+        req.session.userLogged = userToLogin;
+
+        // if user checks "Remember me", store Email in cookies
+        // used in userLoggedMiddleware
+        if (req.body.remember_user) {
+          res.cookie("userEmail", req.body.email, {maxAge: 1000 * 30});
+        }
+
         return res.redirect("/users/profile");
       }
 
@@ -312,11 +319,12 @@ const controller = {
 
   profile: (req, res) => {
     return res.render("users/profile", {
-      user: req.session.userIsLogged,
+      user: req.session.userLogged,
     });
   },
 
   logout: (req, res) => {
+    res.clearCookie("userEmail");
     req.session.destroy();
     return res.redirect("/");
   },

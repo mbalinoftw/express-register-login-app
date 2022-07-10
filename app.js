@@ -1,5 +1,3 @@
-// 1:30:00h
-
 require("dotenv").config();
 const createError = require("http-errors");
 const express = require("express");
@@ -10,7 +8,7 @@ const session = require("express-session");
 
 const mainRoutes = require("./src/routes/mainRoutes");
 const userRoutes = require("./src/routes/usersRoutes");
-const userIsLoggedMiddleware = require('./src/middlewares/userIsLoggedMiddleware');
+const userLoggedMiddleware = require('./src/middlewares/userLoggedMiddleware');
 
 const app = express();
 
@@ -24,7 +22,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(session({secret: "secret_cookie", resave: false, saveUninitialized: false}));
-app.use(userIsLoggedMiddleware);
+app.use(userLoggedMiddleware);
 
 app.use("/", mainRoutes);
 app.use("/users", userRoutes);
