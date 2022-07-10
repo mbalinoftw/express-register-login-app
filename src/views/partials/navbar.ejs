@@ -11,10 +11,17 @@
       </ul>
     </div>
     <div class="">
+      <% if (locals.userIsLogged) { %>
+        <ul class="flex items-center gap-4">
+          <li><a href="/users/profile" class="">Profile</a></li>
+          <li><a href="/users/logout" class="">Logout</a></li>
+        </ul>
+      <% } else { %>
       <ul class="flex items-center gap-4">
         <li><a href="/users/register" class="">Register</a></li>
         <li><a href="/users/login" class="">Login</a></li>
       </ul>
+      <% } %> 
     </div>
   </div>
 </nav>

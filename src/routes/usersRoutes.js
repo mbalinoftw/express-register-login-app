@@ -1,15 +1,17 @@
 const express = require("express");
 const router = express.Router();
 
-const uploadFile = require("../middlewares/multerMiddleware.js")
-const validateRegister = require("../middlewares/validateRegisterMiddleware.js")
-const { register, processRegister, login, processLogin, profile } = require("../controllers/usersController");
+const uploadFile = require("../middlewares/multerMiddleware");
+const validateRegister = require("../middlewares/validateRegisterMiddleware");
+const guestMiddleware = require("../middlewares/guestMiddleware");
+const authMiddleware = require("../middlewares/authMiddleware");
+const {register, processRegister, login, processLogin, profile, logout} = require("../controllers/usersController");
 
-
-router.get("/register", register);
+router.get("/register", guestMiddleware, register);
 router.post("/register", uploadFile.single("avatar"), validateRegister, processRegister);
-router.get("/login", login);
+router.get("/login", guestMiddleware, login);
 router.post("/login", processLogin);
-router.get("/profile", profile);
+router.get("/profile", authMiddleware, profile);
+router.get("/logout", logout);
 
 module.exports = router;

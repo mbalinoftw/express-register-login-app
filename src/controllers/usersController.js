@@ -285,7 +285,9 @@ const controller = {
       let passwordIsCorrect = bcryptjs.compareSync(req.body.password, userToLogin.password);
 
       if (passwordIsCorrect) {
-        res.redirect('/users/profile');
+        delete userToLogin.password;
+        req.session.userIsLogged = userToLogin;
+        return res.redirect("/users/profile");
       }
 
       return res.render("users/login", {
@@ -309,8 +311,15 @@ const controller = {
   },
 
   profile: (req, res) => {
-    res.render('users/profile');
-  }
+    return res.render("users/profile", {
+      user: req.session.userIsLogged,
+    });
+  },
+
+  logout: (req, res) => {
+    req.session.destroy();
+    return res.redirect("/");
+  },
 };
 
 module.exports = controller;
